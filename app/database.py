@@ -8,11 +8,14 @@ from app.config import settings
 engine = create_async_engine(settings.db_url, echo=True)
 async_session = async_sessionmaker(engine, expire_on_commit=False)
 
+
 async def get_db():
     async with async_session() as session:
         yield session
 
+
 DBSession = Annotated[AsyncSession, Depends(get_db)]
+
 
 class Base(DeclarativeBase):
     __abstract__ = True
@@ -22,4 +25,3 @@ class Base(DeclarativeBase):
         return f"{cls.__name__.lower()}s"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-

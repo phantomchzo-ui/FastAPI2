@@ -2,6 +2,6 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    pass
+    db_url: str = 'sqlite+aiosqlite:///sql.db'
 
 settings = Settings()

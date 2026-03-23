@@ -20,3 +20,9 @@ class Post(Base):
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
 
     user: Mapped["User"] = relationship(back_populates="posts")
+
+    def __str__(self):
+        return f"{self.__class__.__name__}(id={self.id}, username={self.title!r}, user_id={self.user_id})"
+
+    def __repr__(self):
+        return str(self)

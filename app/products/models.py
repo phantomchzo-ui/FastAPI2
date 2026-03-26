@@ -1,6 +1,7 @@
+from datetime import datetime
 from typing import TYPE_CHECKING
 
-from sqlalchemy import String, Text, ForeignKey
+from sqlalchemy import String, Text, ForeignKey, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database import Base
@@ -26,3 +27,10 @@ class Post(Base):
 
     def __repr__(self):
         return str(self)
+
+
+class Orders(Base):
+    promo_code: Mapped[str | None]
+    created_at: Mapped[datetime] = mapped_column(
+        server_default=func.now(), default=datetime.utcnow
+    )
